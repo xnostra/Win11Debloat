@@ -13,7 +13,7 @@ Microsoft.BingSports                           # Sports news and scores via Bing
 Microsoft.BingTranslator                       # Translation service via Bing
 Microsoft.BingTravel                           # Travel planning and news via Bing (Discontinued)
 Microsoft.BingWeather                          # Weather forecast via Bing
-Microsoft.Copilot                              # AI assistant integrated into Windows
+#Microsoft.Copilot                              # AI assistant integrated into Windows
 Microsoft.Getstarted                           # Tips and introductory guide for Windows (Cannot be uninstalled in Windows 11)
 Microsoft.Messaging                            # Messaging app, often integrates with Skype (Largely deprecated)
 Microsoft.Microsoft3DViewer                    # Viewer for 3D models
@@ -34,13 +34,13 @@ Microsoft.Todos                                # To-do list and task management 
 Microsoft.WindowsAlarms                        # Alarms & Clock app
 Microsoft.WindowsFeedbackHub                   # App for providing feedback to Microsoft on Windows
 Microsoft.WindowsMaps                          # Mapping and navigation app
-Microsoft.WindowsSoundRecorder                 # Basic audio recording app
+#Microsoft.WindowsSoundRecorder                 # Basic audio recording app
 Microsoft.XboxApp                              # Old Xbox Console Companion App, no longer supported
 Microsoft.ZuneVideo                            # Movies & TV app for renting/buying/playing video content (Rebranded as "Films & TV")
 MicrosoftCorporationII.MicrosoftFamily         # Family Safety App for managing family accounts and settings
-MicrosoftCorporationII.QuickAssist             # Remote assistance tool
-MicrosoftTeams                                 # Old MS Teams personal (MS Store version)
-MSTeams                                        # New MS Teams app (Work/School or Personal)
+#MicrosoftCorporationII.QuickAssist             # Remote assistance tool
+#MicrosoftTeams                                 # Old MS Teams personal (MS Store version)
+#MSTeams                                        # New MS Teams app (Work/School or Personal)
 
 ACGMediaPlayer                                 # Media player app
 ActiproSoftwareLLC                             # Potentially UI controls or software components, often bundled by OEMs
