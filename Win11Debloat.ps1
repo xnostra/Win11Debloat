@@ -30,7 +30,7 @@ if ($RemoveApps) {
         try {
             Get-AppxPackage -AllUsers -Name $appName | Remove-AppxPackage -AllUsers -ErrorAction SilentlyContinue
         } catch {
-            Write-Log "[!] Failed to remove $appName: $($_.Exception.Message)"
+            Write-Log "[!] Failed to remove ${appName}: $($_.Exception.Message)"
         }
     }
 }
@@ -51,5 +51,5 @@ Write-Log "[✓] Script completed."
 
 if (-not $Silent) {
     Write-Host "Press any key to exit..."
-    $null = $Host.UI.RawUI.ReadKey("NoEcho,IncludeKeyDown")
+    $null = $Host.UI.RawUI.ReadKey('NoEcho,IncludeKeyDown')
 }
