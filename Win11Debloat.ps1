@@ -30,7 +30,7 @@ if ($RemoveApps) {
         try {
             Get-AppxPackage -AllUsers -Name $appName | Remove-AppxPackage -AllUsers -ErrorAction SilentlyContinue
         } catch {
-            Write-Log "[!] Failed to remove $appName: $_"
+            Write-Log "[!] Failed to remove $appName: $($_.Exception.Message)"
         }
     }
 }
@@ -39,17 +39,17 @@ if ($DisableTelemetry) {
     Write-Log "[+] Disabling telemetry..."
 
     try {
-        New-Item -Path \"HKLM:\\SOFTWARE\\Policies\\Microsoft\\Windows\\DataCollection\" -Force | Out-Null
-        Set-ItemProperty -Path \"HKLM:\\SOFTWARE\\Policies\\Microsoft\\Windows\\DataCollection\" -Name \"AllowTelemetry\" -Value 0
-        Write-Log \"[✓] Telemetry disabled.\"
+        New-Item -Path "HKLM:\SOFTWARE\Policies\Microsoft\Windows\DataCollection" -Force | Out-Null
+        Set-ItemProperty -Path "HKLM:\SOFTWARE\Policies\Microsoft\Windows\DataCollection" -Name "AllowTelemetry" -Value 0
+        Write-Log "[✓] Telemetry disabled."
     } catch {
-        Write-Log \"[!] Failed to disable telemetry: $_\"
+        Write-Log "[!] Failed to disable telemetry: $($_.Exception.Message)"
     }
 }
 
-Write-Log \"[✓] Script completed.\"
+Write-Log "[✓] Script completed."
 
 if (-not $Silent) {
-    Write-Host \"Press any key to exit...\"
-    $null = $Host.UI.RawUI.ReadKey(\"NoEcho,IncludeKeyDown\")
+    Write-Host "Press any key to exit..."
+    $null = $Host.UI.RawUI.ReadKey("NoEcho,IncludeKeyDown")
 }
