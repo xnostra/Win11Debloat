@@ -16,45 +16,40 @@ Write-Log " Win11Debloat.ps1 - Custom Fork with KeepApps Support"
 Write-Log "-------------------------------------------------------------"
 
 if ($RemoveApps) {
-    Write-Log "[+] Removing apps..."
+    Write-Log "[+] Scanning installed apps..."
 
-    # Example hardcoded list of apps (replace this with the actual logic used in original script)
-    $AppList = @(
-        @{ Name = 'MicrosoftTeams' },
-        @{ Name = 'MSTeams' },
-        @{ Name = 'QuickAssist' },
-        @{ Name = 'XboxGameOverlay' },
-        @{ Name = 'Solitaire' },
-        @{ Name = 'ZuneMusic' },
-        @{ Name = 'ZuneVideo' }
-    )
+    $AppList = Get-AppxPackage -AllUsers | Select-Object -ExpandProperty Name | Sort-Object -Unique
 
-    foreach ($app in $AppList) {
-        $appName = $app.Name
-
+    foreach ($appName in $AppList) {
         if ($KeepApps -and $KeepApps -contains $appName) {
             Write-Log "[>] Skipping $appName (in KeepApps)"
             continue
         }
 
-        # Replace with actual app removal logic
         Write-Log "[-] Removing $appName..."
-        # Example (disabled to prevent real execution):
-        # Get-AppxPackage -Name $appName | Remove-AppxPackage -ErrorAction SilentlyContinue
+        try {
+            Get-AppxPackage -AllUsers -Name $appName | Remove-AppxPackage -AllUsers -ErrorAction SilentlyContinue
+        } catch {
+            Write-Log "[!] Failed to remove $appName: $_"
+        }
     }
 }
 
 if ($DisableTelemetry) {
     Write-Log "[+] Disabling telemetry..."
 
-    # Add real telemetry disabling logic here
-    # Example (disabled):
-    # Set-ItemProperty -Path "HKLM:\SOFTWARE\Policies\Microsoft\Windows\DataCollection" -Name "AllowTelemetry" -Value 0
+    try {
+        New-Item -Path \"HKLM:\\SOFTWARE\\Policies\\Microsoft\\Windows\\DataCollection\" -Force | Out-Null
+        Set-ItemProperty -Path \"HKLM:\\SOFTWARE\\Policies\\Microsoft\\Windows\\DataCollection\" -Name \"AllowTelemetry\" -Value 0
+        Write-Log \"[✓] Telemetry disabled.\"
+    } catch {
+        Write-Log \"[!] Failed to disable telemetry: $_\"
+    }
 }
 
-Write-Log "[✓] Done."
+Write-Log \"[✓] Script completed.\"
 
 if (-not $Silent) {
-    Write-Host "Press any key to exit..."
-    $null = $Host.UI.RawUI.ReadKey("NoEcho,IncludeKeyDown")
+    Write-Host \"Press any key to exit...\"
+    $null = $Host.UI.RawUI.ReadKey(\"NoEcho,IncludeKeyDown\")
 }
